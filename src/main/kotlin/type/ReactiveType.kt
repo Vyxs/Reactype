@@ -1,3 +1,7 @@
+package type
+
+import subscription.Disposable
+
 interface ReactiveType<T> {
     val value: T
 }

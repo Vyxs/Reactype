@@ -1,3 +1,5 @@
+package type
+
 class TransformerChain<T>(
     val transformer: () -> T,
     val dependencies: Set<ReactiveType<*>>

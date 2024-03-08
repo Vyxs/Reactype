@@ -1,4 +1,4 @@
-
+package subscription
 class CompositeDisposable {
 
     private val disposables: MutableList<Disposable> = mutableListOf()
