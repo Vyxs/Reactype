@@ -8,4 +8,6 @@ class TransformerChain<T>(
 
     override val value: T
         get() = transformer()
+
+    val typed = ImmutableReactiveType(this)
 }
