@@ -19,3 +19,29 @@ class MutableReactiveType<T>(initialValue: T) : ReactiveType<T> {
         observers.remove(observer)
     }
 }
+
+class ImmutableReactiveType<T>(val transformer: TransformerChain<T>) : ReactiveType<T> {
+    override val value: T
+        get() = transformer()
+
+    fun subscribe(deferred: Boolean = true, subscriber: (T) -> Unit): Disposable {
+        if (!deferred)
+            subscriber(value)
+
+        val observer = {
+            subscriber(this@ImmutableReactiveType.value)
+        }
+
+        val mutableTypes = transformer.dependencies.filterIsInstance<MutableReactiveType<*>>()
+
+        mutableTypes.forEach {
+            it.addObserver(observer)
+        }
+
+        return {
+            mutableTypes.forEach {
+                it.removeObserver(observer)
+            }
+        }
+    }
+}
