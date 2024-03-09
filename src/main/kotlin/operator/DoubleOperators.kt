@@ -7,142 +7,142 @@ import type.TransformerChain
 /**
  * ================ Plus Operator ================
  **/
-operator fun MutableReactiveType<Double>.plus(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value + other.value }, setOf(this@plus, other))
+operator fun <T: Number> MutableReactiveType<Double>.plus(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value + other.value.toDouble() }, setOf(this@plus, other))
 
-operator fun MutableReactiveType<Double>.plus(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value + other.value }, setOf(this@plus) union other.transformer.dependencies)
-operator fun MutableReactiveType<Double>.plus(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value + other() }, setOf(this@plus) union other.dependencies)
-operator fun MutableReactiveType<Double>.plus(other: Double): TransformerChain<Double> =
-    TransformerChain({ this.value + other }, setOf(this@plus))
+operator fun <T: Number> MutableReactiveType<Double>.plus(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value + other.value.toDouble() }, setOf(this@plus) union other.transformer.dependencies)
+operator fun <T: Number> MutableReactiveType<Double>.plus(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this.value + other().toDouble() }, setOf(this@plus) union other.dependencies)
+operator fun <T: Number> MutableReactiveType<Double>.plus(other: T): TransformerChain<Double> =
+    TransformerChain({ this.value + other.toDouble() }, setOf(this@plus))
 
-operator fun ImmutableReactiveType<Double>.plus(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value + other.value }, this@plus.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.plus(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value + other() }, this@plus.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.plus(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value + other.value }, this@plus.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.plus(other: Double): TransformerChain<Double> =
-    TransformerChain({ this.value + other }, this@plus.transformer.dependencies)
+operator fun <T: Number> ImmutableReactiveType<Double>.plus(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value + other.value.toDouble() }, this@plus.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.plus(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this.value + other().toDouble() }, this@plus.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.plus(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value + other.value.toDouble() }, this@plus.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.plus(other: T): TransformerChain<Double> =
+    TransformerChain({ this.value + other.toDouble() }, this@plus.transformer.dependencies)
 
-operator fun TransformerChain<Double>.plus(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this() + other.value }, setOf(other) union this@plus.dependencies)
-operator fun TransformerChain<Double>.plus(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this() + other() }, other.dependencies union this@plus.dependencies)
-operator fun TransformerChain<Double>.plus(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this() + other.value }, other.transformer.dependencies union this@plus.dependencies)
-operator fun TransformerChain<Double>.plus(other: Double): TransformerChain<Double> =
-    TransformerChain({ this() + other }, this@plus.dependencies)
+operator fun <T: Number>TransformerChain<Double>.plus(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this() + other.value.toDouble() }, setOf(other) union this@plus.dependencies)
+operator fun <T: Number>TransformerChain<Double>.plus(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this() + other().toDouble() }, other.dependencies union this@plus.dependencies)
+operator fun <T: Number>TransformerChain<Double>.plus(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this() + other.value.toDouble() }, other.transformer.dependencies union this@plus.dependencies)
+operator fun <T: Number>TransformerChain<Double>.plus(other: T): TransformerChain<Double> =
+    TransformerChain({ this() + other.toDouble() }, this@plus.dependencies)
 
 /**
  * ================ Minus Operator ================
  **/
-operator fun MutableReactiveType<Double>.minus(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value - other.value }, setOf(this@minus, other))
+operator fun <T: Number> MutableReactiveType<Double>.minus(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value - other.value.toDouble() }, setOf(this@minus, other))
 
-operator fun MutableReactiveType<Double>.minus(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value - other.value }, setOf(this@minus) union other.transformer.dependencies)
-operator fun MutableReactiveType<Double>.minus(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value - other() }, setOf(this@minus) union other.dependencies)
-operator fun MutableReactiveType<Double>.minus(other: Double): TransformerChain<Double> =
-    TransformerChain({ this.value - other }, setOf(this@minus))
+operator fun <T: Number> MutableReactiveType<Double>.minus(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value - other.value.toDouble() }, setOf(this@minus) union other.transformer.dependencies)
+operator fun <T: Number> MutableReactiveType<Double>.minus(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this.value - other().toDouble() }, setOf(this@minus) union other.dependencies)
+operator fun <T: Number> MutableReactiveType<Double>.minus(other: T): TransformerChain<Double> =
+    TransformerChain({ this.value - other.toDouble() }, setOf(this@minus))
 
-operator fun ImmutableReactiveType<Double>.minus(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value - other.value }, this@minus.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.minus(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value - other() }, this@minus.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.minus(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value - other.value }, this@minus.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.minus(other: Double): TransformerChain<Double> =
-    TransformerChain({ this.value - other }, this@minus.transformer.dependencies)
+operator fun <T: Number> ImmutableReactiveType<Double>.minus(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value - other.value.toDouble() }, this@minus.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.minus(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this.value - other().toDouble() }, this@minus.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.minus(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value - other.value.toDouble() }, this@minus.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.minus(other: T): TransformerChain<Double> =
+    TransformerChain({ this.value - other.toDouble() }, this@minus.transformer.dependencies)
 
-operator fun TransformerChain<Double>.minus(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this() - other.value }, setOf(other) union this@minus.dependencies)
-operator fun TransformerChain<Double>.minus(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this() - other() }, other.dependencies union this@minus.dependencies)
-operator fun TransformerChain<Double>.minus(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this() - other.value }, other.transformer.dependencies union this@minus.dependencies)
-operator fun TransformerChain<Double>.minus(other: Double): TransformerChain<Double> =
-    TransformerChain({ this() - other }, this@minus.dependencies)
+operator fun <T: Number>TransformerChain<Double>.minus(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this() - other.value.toDouble() }, setOf(other) union this@minus.dependencies)
+operator fun <T: Number>TransformerChain<Double>.minus(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this() - other().toDouble() }, other.dependencies union this@minus.dependencies)
+operator fun <T: Number>TransformerChain<Double>.minus(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this() - other.value.toDouble() }, other.transformer.dependencies union this@minus.dependencies)
+operator fun <T: Number>TransformerChain<Double>.minus(other: T): TransformerChain<Double> =
+    TransformerChain({ this() - other.toDouble() }, this@minus.dependencies)
 
 /**
  * ================ Times Operator ================
  **/
-operator fun MutableReactiveType<Double>.times(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value * other.value }, setOf(this@times, other))
+operator fun <T: Number> MutableReactiveType<Double>.times(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value * other.value.toDouble() }, setOf(this@times, other))
 
-operator fun MutableReactiveType<Double>.times(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value * other.value }, setOf(this@times) union other.transformer.dependencies)
-operator fun MutableReactiveType<Double>.times(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value * other() }, setOf(this@times) union other.dependencies)
-operator fun MutableReactiveType<Double>.times(other: Double): TransformerChain<Double> =
-    TransformerChain({ this.value * other }, setOf(this@times))
+operator fun <T: Number> MutableReactiveType<Double>.times(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value * other.value.toDouble() }, setOf(this@times) union other.transformer.dependencies)
+operator fun <T: Number> MutableReactiveType<Double>.times(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this.value * other().toDouble() }, setOf(this@times) union other.dependencies)
+operator fun <T: Number> MutableReactiveType<Double>.times(other: T): TransformerChain<Double> =
+    TransformerChain({ this.value * other.toDouble() }, setOf(this@times))
 
-operator fun ImmutableReactiveType<Double>.times(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value * other.value }, this@times.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.times(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value * other() }, this@times.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.times(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value * other.value }, this@times.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.times(other: Double): TransformerChain<Double> =
-    TransformerChain({ this.value * other }, this@times.transformer.dependencies)
+operator fun <T: Number> ImmutableReactiveType<Double>.times(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value * other.value.toDouble() }, this@times.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.times(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this.value * other().toDouble() }, this@times.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.times(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value * other.value.toDouble() }, this@times.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.times(other: T): TransformerChain<Double> =
+    TransformerChain({ this.value * other.toDouble() }, this@times.transformer.dependencies)
 
-operator fun TransformerChain<Double>.times(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this() * other.value }, setOf(other) union this@times.dependencies)
-operator fun TransformerChain<Double>.times(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this() * other() }, other.dependencies union this@times.dependencies)
-operator fun TransformerChain<Double>.times(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this() * other.value }, other.transformer.dependencies union this@times.dependencies)
-operator fun TransformerChain<Double>.times(other: Double): TransformerChain<Double> =
-    TransformerChain({ this() * other }, this@times.dependencies)
+operator fun <T: Number>TransformerChain<Double>.times(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this() * other.value.toDouble() }, setOf(other) union this@times.dependencies)
+operator fun <T: Number>TransformerChain<Double>.times(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this() * other().toDouble() }, other.dependencies union this@times.dependencies)
+operator fun <T: Number>TransformerChain<Double>.times(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this() * other.value.toDouble() }, other.transformer.dependencies union this@times.dependencies)
+operator fun <T: Number>TransformerChain<Double>.times(other: T): TransformerChain<Double> =
+    TransformerChain({ this() * other.toDouble() }, this@times.dependencies)
 
 /**
  * ================ Div Operator ================
  **/
-operator fun MutableReactiveType<Double>.div(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value / other.value }, setOf(this@div, other))
+operator fun <T: Number> MutableReactiveType<Double>.div(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value / other.value.toDouble() }, setOf(this@div, other))
 
-operator fun MutableReactiveType<Double>.div(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value / other.value }, setOf(this@div) union other.transformer.dependencies)
-operator fun MutableReactiveType<Double>.div(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value / other() }, setOf(this@div) union other.dependencies)
-operator fun MutableReactiveType<Double>.div(other: Double): TransformerChain<Double> =
-    TransformerChain({ this.value / other }, setOf(this@div))
+operator fun <T: Number> MutableReactiveType<Double>.div(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value / other.value.toDouble() }, setOf(this@div) union other.transformer.dependencies)
+operator fun <T: Number> MutableReactiveType<Double>.div(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this.value / other().toDouble() }, setOf(this@div) union other.dependencies)
+operator fun <T: Number> MutableReactiveType<Double>.div(other: T): TransformerChain<Double> =
+    TransformerChain({ this.value / other.toDouble() }, setOf(this@div))
 
-operator fun ImmutableReactiveType<Double>.div(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value / other.value }, this@div.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.div(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value / other() }, this@div.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.div(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this.value / other.value }, this@div.transformer.dependencies union setOf(other))
-operator fun ImmutableReactiveType<Double>.div(other: Double): TransformerChain<Double> =
-    TransformerChain({ this.value / other }, this@div.transformer.dependencies)
+operator fun <T: Number> ImmutableReactiveType<Double>.div(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value / other.value.toDouble() }, this@div.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.div(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this.value / other().toDouble() }, this@div.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.div(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this.value / other.value.toDouble() }, this@div.transformer.dependencies union setOf(other))
+operator fun <T: Number> ImmutableReactiveType<Double>.div(other: T): TransformerChain<Double> =
+    TransformerChain({ this.value / other.toDouble() }, this@div.transformer.dependencies)
 
-operator fun TransformerChain<Double>.div(other: MutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this() / other.value }, setOf(other) union this@div.dependencies)
-operator fun TransformerChain<Double>.div(other: TransformerChain<Double>): TransformerChain<Double> =
-    TransformerChain({ this() / other() }, other.dependencies union this@div.dependencies)
-operator fun TransformerChain<Double>.div(other: ImmutableReactiveType<Double>): TransformerChain<Double> =
-    TransformerChain({ this() / other.value }, other.transformer.dependencies union this@div.dependencies)
-operator fun TransformerChain<Double>.div(other: Double): TransformerChain<Double> =
-    TransformerChain({ this() / other }, this@div.dependencies)
+operator fun <T: Number>TransformerChain<Double>.div(other: MutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this() / other.value.toDouble() }, setOf(other) union this@div.dependencies)
+operator fun <T: Number>TransformerChain<Double>.div(other: TransformerChain<T>): TransformerChain<Double> =
+    TransformerChain({ this() / other().toDouble() }, other.dependencies union this@div.dependencies)
+operator fun <T: Number>TransformerChain<Double>.div(other: ImmutableReactiveType<T>): TransformerChain<Double> =
+    TransformerChain({ this() / other.value.toDouble() }, other.transformer.dependencies union this@div.dependencies)
+operator fun <T: Number>TransformerChain<Double>.div(other: T): TransformerChain<Double> =
+    TransformerChain({ this() / other.toDouble() }, this@div.dependencies)
 
 /**
  * ================ Assign Operators ================
  **/
-operator fun MutableReactiveType<Double>.plusAssign(value: Double) {
-    this.value += value
+operator fun <T: Number> MutableReactiveType<Double>.plusAssign(value: T) {
+    this.value += value.toDouble()
 }
 
-operator fun MutableReactiveType<Double>.minusAssign(value: Double) {
-    this.value -= value
+operator fun <T: Number> MutableReactiveType<Double>.minusAssign(value: T) {
+    this.value -= value.toDouble()
 }
 
-operator fun MutableReactiveType<Double>.timesAssign(value: Double) {
-    this.value *= value
+operator fun <T: Number> MutableReactiveType<Double>.timesAssign(value: T) {
+    this.value *= value.toDouble()
 }
 
-operator fun MutableReactiveType<Double>.divAssign(value: Double) {
-    this.value /= value
+operator fun <T: Number> MutableReactiveType<Double>.divAssign(value: T) {
+    this.value /= value.toDouble()
 }
