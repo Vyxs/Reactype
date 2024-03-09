@@ -40,3 +40,15 @@ operator fun TransformerChain<String>.plus(other: String): TransformerChain<Stri
     TransformerChain({ this() + other }, this@plus.dependencies)
 operator fun TransformerChain<String>.plus(other: Any): TransformerChain<String> =
     TransformerChain({ this() + other.toString() }, this@plus.dependencies)
+
+/**
+ * ================ Times Operator ================
+ **/
+operator fun <T: Number> MutableReactiveType<String>.times(other: MutableReactiveType<T>): TransformerChain<String> =
+    TransformerChain({ this.value.repeat(other.value.toInt()) }, setOf(this@times, other))
+operator fun <T: Number> MutableReactiveType<String>.times(other: ImmutableReactiveType<T>): TransformerChain<String> =
+    TransformerChain({ this.value.repeat(other.value.toInt()) }, setOf(this@times) union other.transformer.dependencies)
+operator fun <T: Number> MutableReactiveType<String>.times(other: TransformerChain<T>): TransformerChain<String> =
+    TransformerChain({ this.value.repeat(other().toInt()) }, setOf(this@times) union other.dependencies)
+operator fun <T: Number> MutableReactiveType<String>.times(other: T): TransformerChain<String> =
+    TransformerChain({ this.value.repeat(other.toInt()) }, setOf(this@times))
