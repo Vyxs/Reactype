@@ -1,4 +1,6 @@
+import builder.double
 import builder.int
+import builder.string
 import operator.div
 import operator.minus
 import operator.plus
@@ -163,4 +165,42 @@ class TestTypes {
         Assertions.assertEquals(5, f())
     }
 
+    @Test
+    @DisplayName("Test string type")
+    fun testStringType() {
+        val a = string("Hello")
+        val b = string("World")
+        val c = a + b
+
+        Assertions.assertEquals("HelloWorld", c.value)
+    }
+
+    @Test
+    @DisplayName("Test string type with change")
+    fun testStringTypeWithChange() {
+        val a = string("Hello")
+        val b = string("World")
+        val c = (a + b).typed
+
+        Assertions.assertEquals("HelloWorld", c.value)
+
+        a.value = "Hi"
+        b.value = "There"
+        Assertions.assertEquals("HiThere", c.value)
+    }
+
+    @Test
+    @DisplayName("Test string type combined with other types")
+    fun testStringTypeWithOther() {
+        val a = string("Hello")
+        val b = int(10)
+        val c = double(5.0)
+        val d = a + b * c
+
+        Assertions.assertEquals("Hello50", d.value)
+
+        c.value = 2.0
+        a.value = "Hi"
+        Assertions.assertEquals("Hi20", d.value)
+    }
 }

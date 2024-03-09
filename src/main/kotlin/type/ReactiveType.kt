@@ -22,6 +22,10 @@ class MutableReactiveType<T>(initialValue: T) : ReactiveType<T> {
     fun removeObserver(observer: () -> Unit) {
         observers.remove(observer)
     }
+
+    override fun toString(): String {
+        return value.toString()
+    }
 }
 
 class ImmutableReactiveType<T>(val transformer: TransformerChain<T>) : ReactiveType<T> {
@@ -47,5 +51,9 @@ class ImmutableReactiveType<T>(val transformer: TransformerChain<T>) : ReactiveT
                 it.removeObserver(observer)
             }
         }
+    }
+
+    override fun toString(): String {
+        return value.toString()
     }
 }

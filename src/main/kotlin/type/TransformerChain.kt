@@ -12,4 +12,8 @@ class TransformerChain<T>(
         get() = transformer()
 
     val typed = ImmutableReactiveType(this)
+
+    override fun toString(): String {
+        return value.toString()
+    }
 }
